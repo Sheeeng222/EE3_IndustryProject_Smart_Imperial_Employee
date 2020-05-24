@@ -1,7 +1,25 @@
-<h2 text-center>You are logged in!</h2>
+<ion-header>
+  <ion-navbar>
+    <ion-title >Smart Imperial</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="logOut()">
+        Log out
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
-<div margin-top text-center>
-  <button ion-button (click)="logOut()">
-    Log out
-  </button>
-</div>
+<ion-content text-center>
+  <h5>Welcome to your personal page!</h5>
+  <h5>Hello {{displayinfo}}</h5>
+  <ion-item text-center>
+    <button ion-button (click)="profile()">
+      Profile
+    </button>
+  </ion-item>
+  <ion-item text-center>
+    <button ion-button (click)="openMap()">
+      Open Map
+    </button>
+  </ion-item>
+</ion-content>

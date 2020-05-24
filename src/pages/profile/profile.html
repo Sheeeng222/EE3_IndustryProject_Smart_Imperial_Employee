@@ -1,0 +1,95 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Personal Profile</ion-title>
+    <!-- <ion-buttons right>
+      <button ion-button (click)="goHome()">
+        Home Page
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <h6>Title:</h6>
+    <ion-item>
+      <ion-label>Title:</ion-label>
+      <ion-select  cancel-text="Cancel" ok-text="Next" 
+      (ionBlur)="selectedTitle($event)"
+      >  
+        <ion-option value="Mr.">Mr.</ion-option>
+        <ion-option value="Mrs.">Mrs.</ion-option>
+        <ion-option value="Miss">Miss</ion-option>
+        <ion-option value="Ms">Ms</ion-option>
+        <ion-option value="Mx">Mx</ion-option>
+        <ion-option value="Sir">Sir</ion-option>
+        <ion-option value="Madam">Madam</ion-option>
+        <ion-option value="Dr.">Dr.</ion-option>
+        <ion-option value="Prof.">Prof.</ion-option>
+      </ion-select>
+    </ion-item>
+    <h6>First Name:</h6>
+    <ion-item>
+      <ion-input placeholder="First Name" [(ngModel)]="this.firstname"></ion-input>
+    </ion-item>
+    <h6>Last Name:</h6>
+    <ion-item>
+      <ion-input placeholder="Last Name"  [(ngModel)]="this.lastname"></ion-input>
+    </ion-item>
+    <h6>Username: (Do Not Change!)</h6>
+    <ion-item>
+      <ion-input placeholder="Username"  [(ngModel)]="this.username"></ion-input>
+    </ion-item>
+    <h6>Password:</h6>
+    <ion-item>
+      <ion-input placeholder="Password" type="password" [(ngModel)]="this.password"></ion-input>
+    </ion-item>
+    <h6>Gender:</h6>
+    <ion-item>
+      <ion-label>Gender:</ion-label>
+      <ion-select placeholder="Select One" 
+      (ionBlur)="selectedGender($event)"
+      >
+        <ion-option value="Female">Female</ion-option>
+        <ion-option value="Male">Male</ion-option>
+      </ion-select>
+    </ion-item>
+    <h6>Phone Number:</h6>
+    <ion-item>
+      <ion-input placeholder="Phone Number" [(ngModel)]="this.phone"></ion-input>
+    </ion-item>
+    <h6>Email Address:</h6>
+    <ion-item>
+      <ion-input placeholder="Email Address" [(ngModel)]="this.email"></ion-input>
+    </ion-item>
+    <h6>Employee ID:</h6>
+    <ion-item>
+      <ion-input placeholder="Employee ID" [(ngModel)]="this.ID"></ion-input>
+    </ion-item>
+    <h6>Service Department:</h6>
+    <ion-item>
+      <ion-label>Service Department:</ion-label>
+      <ion-select multiple="True" 
+      (ionBlur)="selectedService($event)"
+      >
+        <ion-option value="Caretaking">Caretaking</ion-option>
+        <ion-option value="Disability & Home Improvement">Disability & Home Improvement </ion-option>
+        <ion-option value="Repairs & Investment">Repairs & Investment </ion-option>
+        <ion-option value="Safer Spaces">Safer Spaces </ion-option>
+        <ion-option value="Street Services">Street Services</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div text-center>
+    <button ion-button color="secondary" (click)="update()">Update</button>
+  </div>
+</ion-content>
