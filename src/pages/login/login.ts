@@ -16,38 +16,22 @@ import Parse from 'parse';
 export class LoginPage {
   username:string;
   password:string;
-
+  info:any;
   constructor(  public navCtrl: NavController,public toastCtrl: ToastController,) {
   }
 
   signUp() {
-    Parse.User.signUp(this.username, this.password).then((resp) => {
-      console.log('Logged in successfully', resp);
-
-      // Clears up the form
-      this.username = '';
-      this.password = '';
-
-      this.toastCtrl.create({
-        message: 'Account created successfully',
-        duration: 2000
-      }).present();
-    }, err => {
-      console.log('Error signing in', err);
-
-      this.toastCtrl.create({
-        message: err.message,
-        duration: 2000
-      }).present();
-    });
+    this.navCtrl.push('RegisterPage')
+    
   }
 
   signIn() {
     Parse.User.logIn(this.username, this.password,{}).then((resp) => {
       console.log('Logged in successfully', resp);
-
       // If you app has Tabs, set root to TabsPage
-      this.navCtrl.setRoot('HomePage')
+      var info = this.username;
+      this.navCtrl.push('HomePage',{info})
+      console.log('LoginSend '+info)
     }, err => {
       console.log('Error logging in', err);
 
@@ -56,6 +40,11 @@ export class LoginPage {
         duration: 2000
       }).present();
     });
+    const LoginHistory = Parse.Object.extend("LoginHistory");
+    const history = new LoginHistory();
+    history.set("Username", this.username);
+    history.save();
+
   }
 
   ionViewDidLoad() {
