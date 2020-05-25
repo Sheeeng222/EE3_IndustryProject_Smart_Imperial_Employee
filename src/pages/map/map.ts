@@ -1,3 +1,4 @@
+import { Marker } from './map';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GoogleMaps,GoogleMap, GoogleMapOptions } from '@ionic-native/google-maps';
@@ -48,13 +49,27 @@ export class MapPage {
 
     };
 
-     this.map = new google.maps.Map(this.mapRef.nativeElement,options);
+    this.map = new google.maps.Map(this.mapRef.nativeElement,options);
     // this.map = GoogleMaps.create('map_canvas', mapOptions);
-    for(var i=0;i<this.markers.length;i++){
+    for(var i=0;i<1;i++){
       const mark = new google.maps.LatLng(this.markers[i].lat,this.markers[i].lng);
       this.addMarker(mark,this.map);
-
     }
+
+    var contentstring = "hello!";
+    var pos = new google.maps.LatLng(this.markers[0].lat,this.markers[0].lng);
+    var infowindow = new google.maps.InfoWindow({
+      content: contentstring
+    })
+    var point = new google.maps.Marker({
+      position: pos,
+      map: this.map
+    })
+    point.addListener('click',function(){
+      infowindow.open(this.map,point);
+
+    });
+
   }
 
   addMarker(position,map){
