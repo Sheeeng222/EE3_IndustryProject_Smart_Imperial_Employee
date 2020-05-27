@@ -66,12 +66,12 @@ export class TaskPage {
       console.log('Taskusername ' + this.username +'Taskdata'+data);
       alert('Please not change your usernmae!');
     }
-    // else if((this.username==null)||(this.startpoint ==null)||(this.destination ==null)||
-    //   (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicle==null)||
-    //   (this.task ==null)||(this.service==null)||(this.date==null)||(this.complete==null)){
-    //   alert('Please fill in all details inorder to creat a task!');
-    //   //this.navCtrl.setRoot('RegisterPage');
-    // }else{
+    else if((this.username==null)||(this.startpoint ==null)||(this.destination ==null)||
+      (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicle==null)||
+      (this.task ==null)||(this.service==null)||(this.date==null)||(this.complete==null)){
+      alert('Please fill in all details inorder to creat a task!');
+      //this.navCtrl.setRoot('RegisterPage');
+    }else{
       const Task = Parse.Object.extend("Task");
       const task = new Task();
       task.set("Username", this.username);
@@ -114,7 +114,7 @@ export class TaskPage {
         alert('Failed to create new object, with error code: ' + error.message);
       });
       this.navCtrl.setRoot('HomePage');
-    //}
+    }
   }
   goback(){
     this.navCtrl.setRoot('HomePage');
