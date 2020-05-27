@@ -21,9 +21,9 @@
 <ion-content>
   <ion-list>
     <h6>Title:</h6>
-    <ion-item>
+    <ion-item color='background'>
       <ion-label>Title:</ion-label>
-      <ion-select  cancel-text="Cancel" ok-text="Next" 
+      <ion-select class = 'placeholder' cancel-text="Cancel" ok-text="Next" 
       (ionBlur)="selectedTitle($event)"
       >  
         <ion-option value="Mr.">Mr.</ion-option>
@@ -38,25 +38,25 @@
       </ion-select>
     </ion-item>
     <h6>First Name:</h6>
-    <ion-item>
-      <ion-input placeholder="First Name" [(ngModel)]="this.firstname"></ion-input>
+    <ion-item color='background'>
+      <ion-input class = 'placeholder' placeholder="First Name" [(ngModel)]="this.firstname"></ion-input>
     </ion-item>
     <h6>Last Name:</h6>
-    <ion-item>
-      <ion-input placeholder="Last Name"  [(ngModel)]="this.lastname"></ion-input>
+    <ion-item color='background'>
+      <ion-input class = 'placeholder' placeholder="Last Name"  [(ngModel)]="this.lastname"></ion-input>
     </ion-item>
     <h6>Username: (Do Not Change!)</h6>
-    <ion-item>
-      <ion-input placeholder="Username"  [(ngModel)]="this.username"></ion-input>
+    <ion-item color='background'>
+      <ion-input class = 'placeholder' placeholder="Username"  [(ngModel)]="this.username"></ion-input>
     </ion-item>
     <h6>Password:</h6>
-    <ion-item>
-      <ion-input placeholder="Password" type="password" [(ngModel)]="this.password"></ion-input>
+    <ion-item color='background'> 
+      <ion-input class = 'placeholder' placeholder="Password" type="password" [(ngModel)]="this.password"></ion-input>
     </ion-item>
     <h6>Gender:</h6>
-    <ion-item>
+    <ion-item color='background'>
       <ion-label>Gender:</ion-label>
-      <ion-select placeholder="Select One" 
+      <ion-select class = 'placeholder' placeholder="Select One" 
       (ionBlur)="selectedGender($event)"
       >
         <ion-option value="Female">Female</ion-option>
@@ -64,21 +64,21 @@
       </ion-select>
     </ion-item>
     <h6>Phone Number:</h6>
-    <ion-item>
-      <ion-input placeholder="Phone Number" [(ngModel)]="this.phone"></ion-input>
+    <ion-item color='background'>
+      <ion-input class = 'placeholder' placeholder="Phone Number" [(ngModel)]="this.phone"></ion-input>
     </ion-item>
     <h6>Email Address:</h6>
-    <ion-item>
-      <ion-input placeholder="Email Address" [(ngModel)]="this.email"></ion-input>
+    <ion-item color='background'>
+      <ion-input class = 'placeholder' placeholder="Email Address" [(ngModel)]="this.email"></ion-input>
     </ion-item>
     <h6>Employee ID:</h6>
-    <ion-item>
-      <ion-input placeholder="Employee ID" [(ngModel)]="this.ID"></ion-input>
+    <ion-item color='background'>
+      <ion-input class = 'placeholder' placeholder="Employee ID" [(ngModel)]="this.ID"></ion-input>
     </ion-item>
     <h6>Service Department:</h6>
-    <ion-item>
+    <ion-item color='background'>
       <ion-label>Service Department:</ion-label>
-      <ion-select multiple="True" 
+      <ion-select class = 'placeholder' placeholder="Service Department" multiple="True" 
       (ionBlur)="selectedService($event)"
       >
         <ion-option value="Caretaking">Caretaking</ion-option>
