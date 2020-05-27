@@ -9,17 +9,33 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content text-center>
+<ion-content text-center >
   <h5>Welcome to your personal page!</h5>
   <h5>Hello {{displayinfo}}</h5>
-  <ion-item text-center>
-    <button ion-button (click)="profile()">
+  <ion-item text-center color='background' no-lines>
+    <button ion-button (click)="profile()" >
       Profile
     </button>
   </ion-item>
-  <ion-item text-center>
+  <ion-item text-center color='background' no-lines>
     <button ion-button (click)="openMap()">
       Open Map
     </button>
   </ion-item>
+  
+  <ion-item  text-center color='background' no-lines>
+    <button ion-button (click)="viewTask()">
+      View Task List
+    </button>
+  </ion-item>
+
+  <ion-item  text-center color='background' no-lines>
+    <button ion-button (click)="openTask()">
+      Create New Task
+    </button>
+  </ion-item>
+
+  <!-- <div text-center>
+    <img width="180" height="180" src="assets/imgs/Logo_1.png"> 
+ </div> -->
 </ion-content>

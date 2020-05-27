@@ -1,0 +1,67 @@
+<!--
+  Generated template for the TasklistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Task List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<!-- %%%%%%%%%%%%%%this html is not finished!!!!%%%%%%%%%%%%%%%%%
+it can display all data obtained from database
+ but its layout is not organized!  -->
+ <!-- 注意：这里的排版尚未完成， 但是所有从后端获取的数据可以显示  -->
+<ion-content padding>
+  <h5>Hello {{displayinfo}}, following is your task list!</h5>
+
+  <ion-scroll scrollX="true" style="white-space: nowrap; height: 300px;">
+    <ion-grid>      
+      <ion-col class="ion-align-items-center">
+        <ion-col>
+          Username
+        </ion-col>
+        <ion-col>
+          Start Point
+        </ion-col>
+        <ion-col>
+          Destination
+        </ion-col>
+        <ion-col>
+          Distance (miles)
+        </ion-col>
+        <ion-col>
+          Estimated Time
+        </ion-col>
+        <ion-col>
+          Reference Number
+        </ion-col>
+        <ion-col>
+          Date
+        </ion-col>
+        <ion-col>
+          Task Completed
+        </ion-col>
+        <ion-col>
+          Vehicle Type
+        </ion-col>
+        <ion-col>
+          Task Type
+        </ion-col>
+        <ion-col>
+          Service Department
+        </ion-col>
+        <ion-col>
+          Instruction
+        </ion-col>
+      </ion-col>  
+      <ion-col *ngFor="let hero of heros">
+        {{hero}}
+      </ion-col>   
+    </ion-grid>
+  </ion-scroll>
+  
+</ion-content>
