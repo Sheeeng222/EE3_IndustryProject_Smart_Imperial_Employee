@@ -22,7 +22,7 @@ export class LoginPage {
 
   signUp() {
     this.navCtrl.push('RegisterPage')
-    
+
   }
 
   signIn() {
