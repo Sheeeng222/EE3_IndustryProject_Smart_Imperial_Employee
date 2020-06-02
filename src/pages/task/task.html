@@ -23,9 +23,12 @@
 
 
     <h6>Stop(s):</h6>
-    <ion-item color='background'>
-      <ion-input class = 'placeholder' placeholder="Stops" [(ngModel)]="stop"></ion-input>
+    <ion-item color='background' *ngFor="let stop of stopsArray; let i = index">
+      <ion-input class = 'placeholder' placeholder="Stop" [(ngModel)]="stopsArray[i].value"></ion-input>
     </ion-item>
+    <button ion-button   (click)="Add()">Add Stop(s)</button>
+    <button ion-button   (click)="Remove()">Remove Stop(s)</button>
+
     <h6>Destination:</h6>
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Destination" [(ngModel)]="destination"></ion-input>

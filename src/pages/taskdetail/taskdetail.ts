@@ -19,7 +19,7 @@ export class TaskdetailPage {
   username: any;
   taskref: any;
 
-  stop: string;
+  stop: any=[];
   destination: string;
   distance:string;
   time:string;
@@ -89,7 +89,7 @@ export class TaskdetailPage {
       console.log(object.id);
       var info ={
       username: object.get('Username'),
-      stop    : object.get('StartPoint'),
+      stop    : object.get('StopPoint'),
       destination:  object.get('Destination'),
       distance: object.get('Distance'),
       time    : object.get('EstimatedTime'),
