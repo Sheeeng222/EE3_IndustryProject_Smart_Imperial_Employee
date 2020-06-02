@@ -19,7 +19,7 @@ it can display all data obtained from database
   <h5>Hello {{displayinfo}}, following is your task list!</h5>
 
   <ion-scroll scrollX="true" style="white-space: nowrap; height: 300px;">
-    <ion-grid>      
+    <ion-grid>
       <ion-col class="ion-align-items-center">
         <ion-col>
           Username
@@ -57,11 +57,16 @@ it can display all data obtained from database
         <ion-col>
           Instruction
         </ion-col>
-      </ion-col>  
+        <ion-col>
+          <button ion-button (click)="navigate()">
+            open in google map
+          </button>
+        </ion-col>
+      </ion-col>
       <ion-col *ngFor="let hero of heros">
         {{hero}}
-      </ion-col>   
+      </ion-col>
     </ion-grid>
   </ion-scroll>
-  
+
 </ion-content>
