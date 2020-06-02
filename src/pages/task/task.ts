@@ -17,7 +17,7 @@ import { ScaleControlStyle } from '@agm/core/services/google-maps-types';
 export class TaskPage {
   username: string;
   //stop= [{}];
-  stop: string;
+  stop:any=[];
   destination: string;
   distance:string;
   time:string;
@@ -35,6 +35,7 @@ export class TaskPage {
   info:any;
   data:any;
   displayinfo: any;
+  public stopsArray:any=[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -66,12 +67,16 @@ export class TaskPage {
     this.time=event.value
   }
   async create(event){
+    for(let i=0;i<this.stopsArray.length;i++){
+      this.stop.push(this.stopsArray[i].value);
+    }
+    // console.log('stops check: '+this.stop);
     let data  = this.navParams.get("info");
     if(this.username!=data){
       console.log('Taskusername ' + this.username +'Taskdata'+data);
       alert('Please not change your usernmae!');
     }
-    else if((this.username==null)||(this.stop ==null)||(this.destination ==null)||(this.vehicleid==null)||
+    else if((this.username==null)||(this.stop==null)||(this.destination ==null)||(this.vehicleid==null)||
       (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicletype==null)||
       (this.tasktype ==null)||(this.servicetype==null)||(this.date==null)||(this.complete==null)){
       alert('Please fill in all details inorder to creat a task!');
@@ -81,7 +86,7 @@ export class TaskPage {
       const task = new Task();
       //16 variables for Task objcet
       task.set("Username", this.username);
-      task.set("StartPoint", this.stop);
+      task.set("StopPoint", this.stop);
       task.set("Destination", this.destination);
       task.set("Distance", this.distance);
       task.set("EstimatedTime", this.time);
@@ -132,6 +137,12 @@ export class TaskPage {
   }
   viewtask(){
     this.navCtrl.push('TasklistPage');
+  }
+  Add(){
+    this.stopsArray.push({});
+  }
+  Remove(){
+    this.stopsArray.pop({});
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TaskPage');

@@ -84,7 +84,7 @@ export class HomePage {
       console.log(object.id);
       var info ={
       username: object.get('Username'),
-      stop    : object.get('StartPoint'),
+      stop    : object.get('StopPoint'),
       destination:  object.get('Destination'),
       distance: object.get('Distance'),
       time    : object.get('EstimatedTime'),
@@ -101,11 +101,12 @@ export class HomePage {
 
       taskinfo.push(info);
     }
+    if(taskinfo.length==0){
+      alert('You have no task history!');
+    }else{
       console.log('homepush: '+ taskinfo[0].reference);
-      
-
-      
-    this.navCtrl.push('TasklistPage', {taskinfo});
+      this.navCtrl.push('TasklistPage', {taskinfo});
+    }
     //console.log('homepush newtaskinfo: '+ newtaskinfo, 'infolength: '+newtaskinfo.length);
     //console.log('homepush taskinso: '+ taskinfo[0].object +"<>"+taskinfo[1].object);
   }

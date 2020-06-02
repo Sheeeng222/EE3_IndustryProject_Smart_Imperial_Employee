@@ -17,7 +17,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 })
 export class TasklistPage {
   username: string;
-  stop: string;
+  stop: any=[];
   destination: string;
   distance:string;
   time:string;
@@ -53,6 +53,10 @@ export class TasklistPage {
   }
   godetail(data){
     this.navCtrl.setRoot('TaskdetailPage', {data} );
+  }
+  goHome(){
+    var info=this.username;
+    this.navCtrl.setRoot('HomePage', {info} );
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TasklistPage');
