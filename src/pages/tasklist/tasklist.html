@@ -11,57 +11,51 @@
   </ion-navbar>
 
 </ion-header>
-<!-- %%%%%%%%%%%%%%this html is not finished!!!!%%%%%%%%%%%%%%%%%
-it can display all data obtained from database
- but its layout is not organized!  -->
- <!-- 注意：这里的排版尚未完成， 但是所有从后端获取的数据可以显示  表格可以向右滑动-->
-<ion-content padding>
-  <h5>Hello {{displayinfo}}, following is your task list!</h5>
 
-  <ion-scroll scrollX="true" style="white-space: nowrap; height: 300px;">
-    <ion-grid>      
-      <ion-col class="ion-align-items-center">
-        <ion-col>
-          Username
-        </ion-col>
-        <ion-col>
-          Start Point
-        </ion-col>
-        <ion-col>
-          Destination
-        </ion-col>
-        <ion-col>
-          Distance (miles)
-        </ion-col>
-        <ion-col>
-          Estimated Time
-        </ion-col>
-        <ion-col>
-          Reference Number
-        </ion-col>
-        <ion-col>
-          Date
-        </ion-col>
-        <ion-col>
-          Task Completed
-        </ion-col>
-        <ion-col>
-          Vehicle Type
-        </ion-col>
-        <ion-col>
-          Task Type
-        </ion-col>
-        <ion-col>
-          Service Department
-        </ion-col>
-        <ion-col>
-          Instruction
-        </ion-col>
-      </ion-col>  
-      <ion-col *ngFor="let hero of heros">
-        {{hero}}
-      </ion-col>   
-    </ion-grid>
-  </ion-scroll>
+
+<ion-content padding>
+  <h5>Hello {{displayinfo}}, following is your task summary!</h5>
+  
+  <!-- <ion-scroll scrollX="true" style="white-space: nowrap; height: 300px;"> -->
+      <!-- <ion-col size="2" *ngIf="bulkEdit">
+        Select
+      </ion-col> -->
+    <div>
+      <h6 text-center>Task Summary</h6>
+      <h6 text-center>Click task reference to view details</h6>
+      <ion-grid>
+        <!-- <ion-row>
+          <ion-col class="bgcolor" size="9" text-center><div><B>Task Reference</B></div></ion-col>
+          <ion-col class="bgcolor" size="9" text-center><div><B>Service Type</B></div></ion-col>
+          <ion-col class="bgcolor" size="9" text-center><div><B>Distance</B></div></ion-col>
+          <ion-col class="bgcolor" size="9" text-center><div><B>Time</B></div></ion-col>
+        </ion-row> -->
+        <ion-row text-center>
+          <ion-col>
+              Date
+          </ion-col>
+          <ion-col >
+            Task Ref.
+          </ion-col>
+          <ion-col >
+              Vehicle
+          </ion-col>
+          <ion-col >
+              Service
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of taskdatas; let i = index">
+          <ion-col size="6" text-center> {{ item.date }}</ion-col>
+          <ion-col class = "long-text-click"  text-center (click)="godetail(item)"> {{ item.object }}</ion-col>
+          <ion-col size="6" text-center> {{ item.vehicleid }}</ion-col>
+          <ion-col class = "long-text" text-center> {{ item.service }}</ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item  text-center color='background' no-lines>
+        <button ion-button (click)="openTask()">
+          Create New Task
+        </button>
+      </ion-item>
+    </div>
   
 </ion-content>

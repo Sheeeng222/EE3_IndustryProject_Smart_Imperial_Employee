@@ -76,37 +76,38 @@ export class HomePage {
   async viewTask(){
     let Tasks = Parse.Object.extend('Task')
     let tasks = new Parse.Query(Tasks);
-    var taskinfo;
-    var newtaskinfo;
+    var taskinfo = [];
     tasks.equalTo("Username", this.username);
     const results = await tasks.find();
     for (let i = 0; i < results.length; i++) {
       var object = results[i];
       console.log(object.id);
-      var info = [object.get('Username'),
-                  object.get('StartPoint'),
-                  object.get('Destination'),
-                  object.get('Distance'),
-                  object.get('EstimatedTime'),
-                  object.get('Service'),
-                  object.get('ReferenceNumber'),
-                  object.get('Date'),
-                  object.get('Complete'),
-                  object.get('Vehicle'),
-                  object.get('TaskType'),
-                  object.get('Instruction'),
-                  object.id
-                ];
-      console.log('homepush: '+ info);
-      if(i==0){
-        taskinfo=info;
-      }else{
-        newtaskinfo = taskinfo.push(info);
-      }
-      }
+      var info ={
+      username: object.get('Username'),
+      stop    : object.get('StartPoint'),
+      destination:  object.get('Destination'),
+      distance: object.get('Distance'),
+      time    : object.get('EstimatedTime'),
+      service : object.get('ServiceType'),
+      number:object.get('ReferenceNumber'),
+      date    : object.get('Date'),
+      complete: object.get('Complete'),
+      vehicletype : object.get('VehicleType'),
+      vehicleid :object.get('VehicleID'),
+      task    : object.get('TaskType'),
+      instruction: object.get('Instruction'),
+      object  :    object.id
+      };
+
+      taskinfo.push(info);
+    }
+      console.log('homepush: '+ taskinfo[0].reference);
+      
+
+      
     this.navCtrl.push('TasklistPage', {taskinfo});
     //console.log('homepush newtaskinfo: '+ newtaskinfo, 'infolength: '+newtaskinfo.length);
-    console.log('homepush taskinso: '+ taskinfo[0]);
+    //console.log('homepush taskinso: '+ taskinfo[0].object +"<>"+taskinfo[1].object);
   }
   async profile() {
     let Employees = Parse.Object.extend('Employees')
