@@ -20,9 +20,11 @@
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Your Username" [(ngModel)]="username"></ion-input>
     </ion-item>
-    <h6>Starting Point:</h6>
+
+
+    <h6>Stop(s):</h6>
     <ion-item color='background'>
-      <ion-input class = 'placeholder' placeholder="Starting Point" [(ngModel)]="startpoint"></ion-input>
+      <ion-input class = 'placeholder' placeholder="Stops" [(ngModel)]="stop"></ion-input>
     </ion-item>
     <h6>Destination:</h6>
     <ion-item color='background'>
@@ -51,7 +53,7 @@
       <ion-select class = 'placeholder' placeholder="Select One" 
       (ionBlur)="selectedComplete($event)"
       >
-        <ion-option value="Yess">Task Completed</ion-option>
+        <ion-option value="Yes">Task Completed</ion-option>
         <ion-option value="No">Task Not Completed</ion-option>
       </ion-select>
     </ion-item>
@@ -63,6 +65,25 @@
       >
         <ion-option value="Nissan">Nissan Env200</ion-option>
         <ion-option value="Renault">Renault Kangoo</ion-option>
+      </ion-select>
+    </ion-item>
+    <h6>Vehicle ID:</h6>
+    <ion-item color='background'>
+      <ion-label>Vehicle ID:</ion-label>
+      <ion-select class = 'placeholder' placeholder="Select One" 
+      (ionBlur)="selectedVehicleID($event)"
+      >
+        <ion-option value="CA 1">CA 1</ion-option>
+        <ion-option value="DI 1">DI 1</ion-option>
+        <ion-option value="RI 1">RI 1</ion-option>
+        <ion-option value="RI 2">RI 2</ion-option>
+        <ion-option value="RI 3">RI 3</ion-option>
+        <ion-option value="RI 4">RI 4</ion-option>
+        <ion-option value="RI 5">RI 5</ion-option>
+        <ion-option value="SA 1">SA 1</ion-option>
+        <ion-option value="SS 1">SS 1</ion-option>
+        <ion-option value="SS 2">SS 2</ion-option>
+        <ion-option value="SS 3">SS 3</ion-option>
       </ion-select>
     </ion-item>
     <h6>Task Type:</h6>

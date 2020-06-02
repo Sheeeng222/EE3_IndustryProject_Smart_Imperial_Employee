@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 //import { HomePage } from '../pages/home/home';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
       apiKey: 'AIzaSyBJwcfgMlynSllZzxCJ_ehUJkXx1zx6VSs'
-    })
+    }),HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
