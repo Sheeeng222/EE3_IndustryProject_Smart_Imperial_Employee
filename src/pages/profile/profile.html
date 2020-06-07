@@ -23,9 +23,9 @@
     <h6>Title:</h6>
     <ion-item color='background'>
       <ion-label>Title:</ion-label>
-      <ion-select class = 'placeholder' cancel-text="Cancel" ok-text="Next" 
+      <ion-select class = 'placeholder' cancel-text="Cancel" ok-text="Next" [(ngModel)]="title"
       (ionBlur)="selectedTitle($event)"
-      >  
+      >
         <ion-option value="Mr.">Mr.</ion-option>
         <ion-option value="Mrs.">Mrs.</ion-option>
         <ion-option value="Miss">Miss</ion-option>
@@ -50,14 +50,14 @@
       <ion-input class = 'placeholder' placeholder="Username"  [(ngModel)]="this.username"></ion-input>
     </ion-item>
     <h6>Password:</h6>
-    <ion-item color='background'> 
+    <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Password" type="password" [(ngModel)]="this.password"></ion-input>
     </ion-item>
     <h6>Gender:</h6>
     <ion-item color='background'>
       <ion-label>Gender:</ion-label>
-      <ion-select class = 'placeholder' placeholder="Select One" 
-      (ionBlur)="selectedGender($event)"
+      <ion-select class = 'placeholder' placeholder="Select One"
+      [(ngModel)] = "gender" (ionBlur)="selectedGender($event)"
       >
         <ion-option value="Female">Female</ion-option>
         <ion-option value="Male">Male</ion-option>
@@ -78,7 +78,7 @@
     <h6>Service Department:</h6>
     <ion-item color='background'>
       <ion-label>Service Department:</ion-label>
-      <ion-select class = 'placeholder' placeholder="Service Department" multiple="True" 
+      <ion-select class = 'placeholder' placeholder="Service Department" [(ngModel)]="service"
       (ionBlur)="selectedService($event)"
       >
         <ion-option value="Caretaking">Caretaking</ion-option>

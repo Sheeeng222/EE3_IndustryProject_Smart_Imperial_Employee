@@ -29,9 +29,9 @@ export class LoginPage {
     Parse.User.logIn(this.username, this.password,{}).then((resp) => {
       console.log('Logged in successfully', resp);
       // If you app has Tabs, set root to TabsPage
-      var info = this.username;
-      this.navCtrl.push('HomePage',{info})
-      console.log('LoginSend '+info)
+      // var info = this.username;
+      this.navCtrl.setRoot('HomePage')
+      console.log('LoginSend ')
     }, err => {
       console.log('Error logging in', err);
 

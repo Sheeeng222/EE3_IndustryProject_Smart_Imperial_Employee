@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
 import Parse from 'parse';
 
 @Component({
@@ -17,7 +18,8 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      Parse.initialize("XiiCvvh3t61q2vMSQornvYKPPsPcTszpsMB0tpbT", "UMEsWQpchNtjV5XCyaA6uXaZOAiXO5x73vObhzKv");
+      Parse.initialize("4EpCkDqxP3a7muRq0TK5Ab95ZeEMIoQxOeRSfHyb", "3oIjMNUvn0WIj6yVTbWPM4ahuUcSoba07pwHVkTA");
+      // Parse.initialize("XiiCvvh3t61q2vMSQornvYKPPsPcTszpsMB0tpbT", "UMEsWQpchNtjV5XCyaA6uXaZOAiXO5x73vObhzKv");
       Parse.serverURL = 'https://parseapi.back4app.com/';
 
       Parse.User.currentAsync().then(user => {

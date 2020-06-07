@@ -1,3 +1,26 @@
 page-tasklist {
+    .bgcolor {
+        background: #cdcfd6;
+      }
 
+      ion-grid {
+        ion-row {
+            ion-col {
+                border: 2px solid #aeb7ca;
+                &.long-text {
+                    width:200px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                &.long-text-click {
+                  width:200px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  color: #32db64;
+              }
+            }
+        }
+    }
 }

@@ -3,7 +3,7 @@
     <name>back4app</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -85,5 +85,4 @@
         <preference name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyBJwcfgMlynSllZzxCJ_ehUJkXx1zx6VSs" />
     </plugin>
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="(AIzaSyBJwcfgMlynSllZzxCJ_ehUJkXx1zx6VSs)" />
-    <allow-navigation href="http://localhost:8100" sessionid="e0350a39" />
 </widget>

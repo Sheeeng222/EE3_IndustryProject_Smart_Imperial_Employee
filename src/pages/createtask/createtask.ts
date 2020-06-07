@@ -1,7 +1,9 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import Parse from 'parse';
 import { ScaleControlStyle } from '@agm/core/services/google-maps-types';
+import { Store } from '@ngrx/store';
 /**
  * Generated class for the TaskPage page.
  *
@@ -9,50 +11,63 @@ import { ScaleControlStyle } from '@agm/core/services/google-maps-types';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage']
+})
 @Component({
   selector: 'page-task',
-  templateUrl: 'task.html',
+  templateUrl: 'createtask.html',
 })
-export class TaskPage {
+export class CreateTaskPage {
   username: string;
-  startpoint: string;
+  //stop= [{}];
+  stop:any=[];
   destination: string;
   distance:string;
   time:string;
   instruction:string;
-  task:string;
+  tasktype:string;
   date:string;
   day:string;
   month:string;
   year:string;
-  service: string;
+  servicetype: string;
   number:string;
-  vehicle:string;
+  vehicletype:string;
+  vehicleid:string;
   complete:string;
   info:any;
   data:any;
-  displayinfo: any;
+  // displayinfo: any;
+  public stopsArray:any=[];
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public toastCtrl: ToastController) {
-      let data  = this.navParams.get("info");
-      this.username= data;
-      console.log('TaskReceive ' + data);
-      this.displayinfo=this.username;
+              public toastCtrl: ToastController,
+              private store:Store<any>) {
+      // let data  = this.navParams.get("info");
+      // this.username= data;
+      // console.log('TaskReceive ' + data);
+      // this.displayinfo=this.username;
+     this.store.select('appReducer').subscribe(state => {
+        this.username = state.username;
+        console.log('username',this.username);
+      });
   }
   selectedTask(event) {
-    this.task =event.value
+    this.tasktype =event.value
   }
   selectedComplete(event) {
     this.complete =event.value
   }
   selectedVehicle(event) {
-    this.vehicle =event.value
+    this.vehicletype =event.value
+  }
+  selectedVehicleID(event) {
+    this.vehicleid =event.value
   }
   selectedService(event) {
-    this.service =event.value
+    this.servicetype =event.value
   }
   selectedDate(event){
     this.date=event.value
@@ -61,21 +76,26 @@ export class TaskPage {
     this.time=event.value
   }
   async create(event){
-    let data  = this.navParams.get("info");
-    if(this.username!=data){
-      console.log('Taskusername ' + this.username +'Taskdata'+data);
-      alert('Please not change your usernmae!');
+    for(let i=0;i<this.stopsArray.length;i++){
+      this.stop.push(this.stopsArray[i].value);
     }
-    else if((this.username==null)||(this.startpoint ==null)||(this.destination ==null)||
-      (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicle==null)||
-      (this.task ==null)||(this.service==null)||(this.date==null)||(this.complete==null)){
+    // console.log('stops check: '+this.stop);
+    // let data  = this.navParams.get("info");
+    // if(this.username!=data){
+    //   console.log('Taskusername ' + this.username +'Taskdata'+data);
+    //   alert('Please not change your username!');
+    // }
+    if((this.username==null)||(this.stop==null)||(this.destination ==null)||(this.vehicleid==null)||
+      (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicletype==null)||
+      (this.tasktype ==null)||(this.servicetype==null)||(this.date==null)||(this.complete==null)){
       alert('Please fill in all details inorder to creat a task!');
       //this.navCtrl.setRoot('RegisterPage');
     }else{
       const Task = Parse.Object.extend("Task");
       const task = new Task();
+      //16 variables for Task objcet
       task.set("Username", this.username);
-      task.set("StartPoint", this.startpoint);
+      task.set("StopPoint", this.stop);
       task.set("Destination", this.destination);
       task.set("Distance", this.distance);
       task.set("EstimatedTime", this.time);
@@ -85,9 +105,10 @@ export class TaskPage {
       task.set("Month", this.date.slice(5,7));
       task.set("Year", this.date.slice(0,4));
       task.set("Complete", this.complete);
-      task.set("Vehicle",this.vehicle);
-      task.set("TaskType", this.task);
-      task.set("Service", this.service);
+      task.set("VehicleType",this.vehicletype);
+      task.set("VehicleID", this.vehicleid);
+      task.set("TaskType", this.tasktype);
+      task.set("ServiceType", this.servicetype);
       task.set("Instruction", this.instruction);
       task.save()
       .then((player) => {
@@ -98,16 +119,18 @@ export class TaskPage {
         //      duration: 2000
         //    })
         this.username = '';
-        this.startpoint = '';
+        //this.stop = [{}];
+        this.stop = '';
         this.destination = '';
         this.distance = '';
         this.time = '';
         this.number = ' ';
         this.date = '';
-        this.vehicle = '';
+        this.vehicletype = '';
+        this.vehicleid = '';
         this.complete = '';
-        this.task = '';
-        this.service = '';
+        this.tasktype = '';
+        this.servicetype = '';
         this.instruction = '';
       }, (error) => {
         // Save fails
@@ -116,11 +139,18 @@ export class TaskPage {
       this.navCtrl.setRoot('HomePage');
     }
   }
-  goback(){
-    this.navCtrl.setRoot('HomePage');
-  }
+  // goback(){
+  //   var info = this.username;
+  //   this.navCtrl.push('HomePage', {info} );
+  // }
   viewtask(){
-    this.navCtrl.setRoot('TasklistPage');
+    this.navCtrl.push('TasklistPage');
+  }
+  Add(){
+    this.stopsArray.push({});
+  }
+  Remove(){
+    this.stopsArray.pop({});
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad TaskPage');

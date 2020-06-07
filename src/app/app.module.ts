@@ -9,6 +9,16 @@ import { MyApp } from './app.component';
 //import { HomePage } from '../pages/home/home';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
+import { localStorageSync } from 'ngrx-store-localstorage';
+import { reducers } from '../pages/store/reducer/';
+
+
+export function localStorageSyncReducer(reducers: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['appReducer'], rehydrate: true})(reducers);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -18,11 +28,12 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    StoreModule.forRoot(reducers,{metaReducers}),
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
       apiKey: 'AIzaSyBJwcfgMlynSllZzxCJ_ehUJkXx1zx6VSs'
-    })
+    }),HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
