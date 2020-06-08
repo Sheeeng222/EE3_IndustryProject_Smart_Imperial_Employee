@@ -6,13 +6,15 @@ export interface appReducerState{
   task: boolean
   task_info?:any
   task_detail?:any
+  DeleteTask: boolean
 }
 
 const initialState: appReducerState = {
   login:false,
   profile:false,
   username: '',
-  task:false
+  task:false,
+  DeleteTask:false
 }
 
 export function reducer(state = initialState,action){
@@ -56,20 +58,28 @@ export function reducer(state = initialState,action){
             if(action.payload.complete){
               return {
                 ...item,
-                complete: "YES"
+                complete: "Yes"
               }
             }
             else{
               return{
                 ...item,
-                complete: "NO"
+                complete: "No"
               }
             }
+
           }
           return item;
         })
-
       }
+      case "DeleteTask":
+        return{
+          ...state,
+          task_info: state.task_info.filter(item =>
+            {
+              return action.payload.object !=item.object
+          })
+        }
       default: return state
   }
 }
