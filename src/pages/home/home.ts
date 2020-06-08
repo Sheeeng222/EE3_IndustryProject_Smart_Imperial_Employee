@@ -107,9 +107,9 @@ export class HomePage {
         vehicleid : object.get('VehicleID'),
         task    : object.get('TaskType'),
         instruction : object.get('Instruction'),
+        // depot : "51.496969,0.107444",
         object  :    object.id
       };
-
       taskinfo.push(info);
     }
     if(taskinfo.length==0){

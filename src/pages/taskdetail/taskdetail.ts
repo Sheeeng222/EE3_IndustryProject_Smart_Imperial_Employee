@@ -1,3 +1,4 @@
+import { ProfilePageModule } from './../profile/profile.module';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
@@ -59,7 +60,7 @@ export class TaskdetailPage {
     // this.number=detailref.number;
     // this.instruction=detailref.instruction;
     // this.instruction= "West Brompton, UK";
-    this.store.select('appReducer').subscribe(state => {
+      this.store.select('appReducer').subscribe(state => {
       this.object = state.task_detail.object
       this.stop=state.task_detail.stop
       this.destination=state.task_detail.destination
@@ -73,6 +74,7 @@ export class TaskdetailPage {
       this.task=state.task_detail.task
       this.number=state.task_detail.number
       this.instruction=state.task_detail.instruction
+      this.depot = state.task_detail.depot
       // console.log('object',this.object);
     });
 
@@ -82,8 +84,26 @@ export class TaskdetailPage {
       this.Checkvalue=false;
     }
   }
-  openTask(){
-    this.navCtrl.push('TaskPage');
+
+  deleteTask(){
+
+    var deletequery = Parse.Object.extend("Task");
+    var deleteObj = new Parse.Query(deletequery);
+    deleteObj.get(this.object, {
+      success: function(yourObj) {
+        // The object was retrieved successfully.
+        yourObj.destroy({});
+      },
+      error: function(object, error) {
+        // The object was not retrieved successfully.
+        // error is a Parse.Error with an error code and description.
+      }
+    });
+    this.store.dispatch({
+      type:"DeleteTask",
+      payload: {object: this.object}
+    })
+    this.navCtrl.pop();
   }
 
   updateCheck(){
@@ -104,7 +124,7 @@ export class TaskdetailPage {
       type:"UpdateComplete",
       payload:{
         object:this.object,
-        complete:this.complete
+        complete:this.Checkvalue
       }
     })
     console.log('check complete:'+player.get('Complete'))
@@ -141,19 +161,20 @@ export class TaskdetailPage {
   // }
 
   navigate(){
-    let options: LaunchNavigatorOptions = {
-      start: this.depot
-    };
+    // let options: LaunchNavigatorOptions = {
+    //   start: "51.496969,0.107444"
+    // };
     var x = this.stop[0];
     for(var i=1;i<this.stop.length;i++){
       x = x + "+to:"+this.stop[i];
     }
     x += "+to:"+this.destination;
     //console.log(this.startpoint,this.destination);
-    this.LaunchNavigator.navigate(x, options)
-        .then(
-            success => alert('Launched navigator'),
-            error => alert('Error launching navigator: ' + error)
+    this.LaunchNavigator.navigate(x, {
+      start:"51.496969,0.107444"
+    }).then(
+          success => alert('Launched navigator'),
+          error => alert('Error launching navigator: ' + error)
     );
   }
 
