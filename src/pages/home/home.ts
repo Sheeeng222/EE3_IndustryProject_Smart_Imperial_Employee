@@ -247,7 +247,7 @@ export class HomePage {
     var fleetquery = new Parse.Query(fleet);
     var subscription = fleetquery.subscribe();
 
-    fleetquery.equalTo('VehicleID', "SS1");
+    fleetquery.equalTo('VehicleID', id);
     subscription.on('update', (object) => {
       var level = object.get('ChargingLevel');
       if(level<="30"){
