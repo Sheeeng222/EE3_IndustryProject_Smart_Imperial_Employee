@@ -60,7 +60,7 @@ export class TaskdetailPage {
     // this.number=detailref.number;
     // this.instruction=detailref.instruction;
     // this.instruction= "West Brompton, UK";
-      this.store.select('appReducer').subscribe(state => {
+    this.store.select('appReducer').subscribe(state => {
       this.object = state.task_detail.object
       this.stop=state.task_detail.stop
       this.destination=state.task_detail.destination

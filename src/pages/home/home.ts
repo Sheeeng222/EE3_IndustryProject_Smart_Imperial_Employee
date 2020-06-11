@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, ViewController,Platform} from 'ionic-angular';
 import {Geolocation, Geoposition} from "@ionic-native/geolocation";
 import Parse from 'parse';
 import {Marker} from "../map/map";
 import {fromPromise} from "rxjs/observable/fromPromise";
-import { Store } from '@ngrx/store';
+import { Store, ActionReducer } from '@ngrx/store';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
 
 
 @IonicPage()
@@ -13,19 +15,25 @@ import { Store } from '@ngrx/store';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  geoposition: Geoposition;
+  // geoposition: Geoposition;
   username:string;
   info: any;
   data: any;
   updatedata:any;
+  ChargeLevel:any;
+  start: string;
+  destination: string;
   // displayinfo: any;
   constructor(
+    public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
     public toastCtrl: ToastController,
     public geolocation: Geolocation,
     //public viewCtrl: ViewController,
-    private store: Store<any>
+    private store: Store<any>,
+    public localnotification: LocalNotifications,
+    public launchnavigator: LaunchNavigator
   ) {
     // let data  = this.navParams.get("info");
     // this.username= data;
@@ -34,11 +42,16 @@ export class HomePage {
     let data  = Parse.User.current();
     this.username = data.get("username");
     console.log("username: ", this.username);
-    // this.displayinfo = this.username;
     this.store.dispatch({
       type: "LOGIN",
       payload: this.username
     });
+
+  }
+
+
+  ionViewDidLoad(){
+    this.RetrieveID();
   }
 
   logOut() {
@@ -74,8 +87,12 @@ export class HomePage {
           rapidA: s.get('RapidA'),
         };
       });
-
-      this.navCtrl.push('MapPage', {data: {markers}});
+      this.store.dispatch({
+        type:"MAP",
+        payload:markers
+      });
+      // this.navCtrl.push('MapPage', {data: {markers}});
+      this.navCtrl.push('MapPage');
     }, err => {
       console.log('Error getting closest user', err)
     })
@@ -125,6 +142,7 @@ export class HomePage {
     //console.log('homepush newtaskinfo: '+ newtaskinfo, 'infolength: '+newtaskinfo.length);
     //console.log('homepush taskinso: '+ taskinfo[0].object +"<>"+taskinfo[1].object);
   }
+
   async profile() {
     let Employees = Parse.Object.extend('Employees')
     let employees = new Parse.Query(Employees);
@@ -156,5 +174,87 @@ export class HomePage {
 
     //alert(object.get('Username'));
   }
+
+  ClosestCharging(){
+    console.log("enter check current ")
+  //   this.geolocation.getCurrentPosition().then((position:Position) => {
+  //     console.log("position here ")
+  //     // this.GetMyCurrentPosition();
+  //     // // console.log('Current Position', resp.coords);
+  //     this.geoposition = position;
+      var geoposition = new Parse.GeoPoint(51.488713,0.005998)
+      let geoPoint = new Parse.GeoPoint(geoposition.latitude, geoposition.longitude);
+      let query = new Parse.Query("Site");
+      query.near('geo', geoPoint);
+      query.limit(1);
+
+      query.find().then(charge => {
+
+        console.log("query find")
+        let closest = charge[0];
+        console.log('Closest user', closest);
+
+        var chargingpoint:Marker = {
+          lat: closest.get('geo').latitude,
+          lng: closest.get('geo').longitude,
+        };
+
+        let user:Marker = {
+          lat: geoposition.latitude,
+          lng: geoposition.longitude,
+        };
+
+        this.start = user.lat +","+user.lng;
+        this.destination = chargingpoint.lat +","+chargingpoint.lng;
+        // console.log("start: ",this.start)
+        // console.log("destination: ",this.destination)
+        this.launchnavigator.navigate(this.destination, {
+          start:this.start
+        }).then(
+          success => console.log('Launched navigator'),
+          error => alert('Error launching navigator: ' + error)
+        );
+      }, err => {
+        console.log('Error getting closest user', err)
+      })
+
+
+  }
+
+  PushNotification(){
+    this.localnotification.schedule({
+      id: 1,
+      title: 'Low Battery EV!',
+      text: 'You need to charge you vehicle ASAP!',
+      foreground: true,
+      icon: 'res://ic_stat_battery_alert',
+      smallIcon: 'res://ic_stat_flash_on',
+    });
+    this.localnotification.on('click').subscribe(notification => {
+      this.ClosestCharging()
+    });
+  }
+
+  async RetrieveID(){
+    var Task = Parse.Object.extend('Task');
+    var Taskquery = new Parse.Query(Task);
+    Taskquery.equalTo('Username',this.username);
+    const result = await Taskquery.find();
+    var id = result[0].get('VehicleID');
+    console.log("id is: ", id);
+
+    var fleet = Parse.Object.extend('Fleet');
+    var fleetquery = new Parse.Query(fleet);
+    var subscription = fleetquery.subscribe();
+
+    fleetquery.equalTo('VehicleID', "SS1");
+    subscription.on('update', (object) => {
+      var level = object.get('ChargingLevel');
+      if(level<="30"){
+      this.PushNotification();
+      }
+    });
+  }
+
 
 }

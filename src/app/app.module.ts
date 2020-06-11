@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { reducers } from '../pages/store/reducer/';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+// import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 
 export function localStorageSyncReducer(reducers: ActionReducer<any>): ActionReducer<any> {
@@ -46,6 +48,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LaunchNavigator,
+    LocalNotifications
   ]
 })
 export class AppModule {}

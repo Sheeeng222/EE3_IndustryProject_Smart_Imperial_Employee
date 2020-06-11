@@ -7,6 +7,9 @@ export interface appReducerState{
   task_info?:any
   task_detail?:any
   DeleteTask: boolean
+  map:boolean
+  map_info?:any
+
 }
 
 const initialState: appReducerState = {
@@ -14,7 +17,8 @@ const initialState: appReducerState = {
   profile:false,
   username: '',
   task:false,
-  DeleteTask:false
+  DeleteTask:false,
+  map:false,
 }
 
 export function reducer(state = initialState,action){
@@ -75,10 +79,18 @@ export function reducer(state = initialState,action){
       case "DeleteTask":
         return{
           ...state,
+          DeleteTask:true,
           task_info: state.task_info.filter(item =>
             {
               return action.payload.object !=item.object
           })
+        }
+
+      case "MAP":
+        return{
+          ...state,
+          map:true,
+          map_info: action.payload
         }
       default: return state
   }
