@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GoogleMaps,GoogleMap, GoogleMapOptions } from '@ionic-native/google-maps';
 import { FindValueSubscriber } from 'rxjs/operators/find';
 import { InfoWindowManager } from '@agm/core';
+import { Store } from '@ngrx/store';
 // import { LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
 // import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -16,7 +17,9 @@ import { InfoWindowManager } from '@agm/core';
 
 declare var google:any;
 
-@IonicPage()
+@IonicPage({
+  defaultHistory:['HomePage']
+})
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html',
@@ -30,16 +33,18 @@ export class MapPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public store: Store<any>
     // private launchNavigator: LaunchNavigator
     ) {
-    let data = this.navParams.get("data");
+    // let data = this.navParams.get("data");
     // this.current = data.current;
-    this.markers = data.markers || [];
-    console.log('Markers received', data);
+    // this.markers = data.markers || [];
+    this.store.select('appReducer').subscribe(state => {
+      this.markers = state.map_info
+    });
+    console.log('Markers received', this.markers);
   }
-  navMap(address){
-    // this.launchNavigator.navigate(address);
-  }
+
   ionViewDidEnter(){
     //console.log('ionViewDidLoad MapsPage');
     this.displayMap();
