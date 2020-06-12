@@ -9,7 +9,9 @@ import Parse from 'parse';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  defaultHistory:['LoginPage']
+})
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
@@ -26,7 +28,7 @@ export class RegisterPage {
   service: string;
   ID: string;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,) {}
   selectedTitle(event) {
@@ -68,7 +70,7 @@ export class RegisterPage {
       employees.set("PhoneNumber", this.phone);
       employees.set("EmailAddress", this.email);
       employees.set("EmployeeID", this.ID);
-      employees.set("ServiceDepartment", this.service);
+      // employees.set("ServiceDepartment", this.service);
       employees.save()
       .then((player) => {
         // Success
@@ -86,16 +88,13 @@ export class RegisterPage {
         this.phone = '';
         this.email = '';
         this.ID = '';
-        this.service = '';
+        // this.service = '';
       }, (error) => {
         // Save fails
         alert('Failed to create new object, with error code: ' + error.message);
       });
       this.navCtrl.setRoot('LoginPage');
     }
-  }
-  goback(){
-    this.navCtrl.setRoot('LoginPage');
   }
 
   ionViewDidLoad() {

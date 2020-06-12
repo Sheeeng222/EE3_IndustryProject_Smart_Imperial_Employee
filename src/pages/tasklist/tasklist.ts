@@ -28,7 +28,7 @@ export class TasklistPage {
   // time:string;
   // instruction:string;
   // task:string;
-  // date:string;
+  // date:any;
   // service: string;
   // number:string;
   // vehicleid:string;
@@ -67,10 +67,21 @@ export class TasklistPage {
     this.store.select('appReducer').subscribe(state => {
       this.username = state.username;
       this.taskdatas = state.task_info;
-      // console.log('username',this.username);
+      this.taskdatas.sort(function(a, b) {
+        var dateA:any = new Date(a.date);
+        var dateB:any = new Date(b.date);
+        return dateB - dateA;
+      })
+      // console.log('taskdatas',this.taskdatas[0].date);
+
     });
 
   }
+
+  // dateToNum(d){
+  //   d = d.split("-");
+  //   return Number(d[2]+d[1]+d[0]);
+  // }
   openTask(){
     // var info = this.username;
     this.navCtrl.push('CreateTaskPage');

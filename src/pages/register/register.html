@@ -18,9 +18,9 @@
     <h6>Title:</h6>
     <ion-item>
       <ion-label>Title:</ion-label>
-      <ion-select  cancel-text="Cancel" ok-text="Next" 
+      <ion-select  cancel-text="Cancel" ok-text="Next"
       (ionBlur)="selectedTitle($event)"
-      >  
+      >
         <ion-option value="Mr.">Mr.</ion-option>
         <ion-option value="Mrs.">Mrs.</ion-option>
         <ion-option value="Miss">Miss</ion-option>
@@ -51,7 +51,7 @@
     <h6>Gender:</h6>
     <ion-item>
       <ion-label>Gender:</ion-label>
-      <ion-select placeholder="Select One" 
+      <ion-select placeholder="Select One"
       (ionBlur)="selectedGender($event)"
       >
         <ion-option value="Female">Female</ion-option>
@@ -73,7 +73,7 @@
     <h6>Service Department:</h6>
     <ion-item>
       <ion-label>Service Department:</ion-label>
-      <ion-select multiple="True" 
+      <ion-select multiple="True"
       (ionBlur)="selectedService($event)"
       >
         <ion-option value="Caretaking">Caretaking</ion-option>
@@ -85,7 +85,7 @@
     </ion-item>
   </ion-list>
   <div text-center>
-    <button ion-button (click)="goback()">Go Back</button>
+    <!-- <button ion-button (click)="goback()">Go Back</button> -->
     <button ion-button color="secondary" (click)="register()">Register</button>
   </div>
 </ion-content>

@@ -85,9 +85,10 @@ export class CreateTaskPage {
     //   console.log('Taskusername ' + this.username +'Taskdata'+data);
     //   alert('Please not change your username!');
     // }
-    if((this.username==null)||(this.stop==null)||(this.destination ==null)||(this.vehicleid==null)||
+    if((this.username==null)||(this.destination ==null)||
       (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicletype==null)||
       (this.tasktype ==null)||(this.servicetype==null)||(this.date==null)||(this.complete==null)){
+
       alert('Please fill in all details inorder to creat a task!');
       //this.navCtrl.setRoot('RegisterPage');
     }else{

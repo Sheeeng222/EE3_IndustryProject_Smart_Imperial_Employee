@@ -22,10 +22,10 @@ export class MyApp {
       // this.pushSetUp();
 
       //ranking now
-      Parse.initialize("cseOe89I1Ky4smtLePWkF5iJCzkhUWeFizpVVSeS", "B6BRsUExTqfHmmwCaCElb4UE82CGB7AjY5ycD308");
+      Parse.initialize("xJ7F9Uixopap8zn7WGlXoWdQMtNaH3DmamCMnMI1", "TsOqkbfPfY7gUDoDluOJ59e5r3lBYLKLeBUSsmya");
       // Parse.initialize("XiiCvvh3t61q2vMSQornvYKPPsPcTszpsMB0tpbT", "UMEsWQpchNtjV5XCyaA6uXaZOAiXO5x73vObhzKv");
       Parse.serverURL = 'https://parseapi.back4app.com/';
-      Parse.liveQueryServerURL = 'ws://ranking.back4app.io';
+      Parse.liveQueryServerURL = 'ws://testingtask.back4app.io';
 
       Parse.User.currentAsync().then(user => {
         console.log('Logged user', user);
