@@ -148,7 +148,7 @@ export class ProfilePage {
         player.set("PhoneNumber", this.phone);
         player.set("EmailAddress", this.email);
         player.set("EmployeeID", this.ID);
-        player.set("ServiceDepartment", this.service);
+        // player.set("ServiceDepartment", this.service);
         player.save();
       });
 
@@ -170,7 +170,7 @@ export class ProfilePage {
       // });
 
       console.log("id in update function: ",result[0].id);
-      console.log("service in update function: ", this.service);
+      // console.log("service in update function: ", this.service);
       alert('Your profile has been updated sucessfully!');
       this.navCtrl.setRoot('HomePage');
     // }

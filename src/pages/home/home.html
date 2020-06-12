@@ -2,6 +2,11 @@
   <ion-navbar>
     <ion-title >Smart Imperial</ion-title>
     <ion-buttons right>
+      <button ion-button (click)="profile()">
+        Profile
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
       <button ion-button (click)="logOut()">
         Log out
       </button>
@@ -12,25 +17,25 @@
 <ion-content text-center >
   <h5>Welcome to your personal page!</h5>
   <h5>Hello {{username}}</h5>
-  <ion-item text-center color='background' no-lines>
-    <button ion-button (click)="profile()" >
+  <!-- <ion-item text-center color='background' no-lines>
+    <button class = "button-container" ion-button (click)="profile()" >
       Profile
-    </button>
-  </ion-item>
-  <ion-item text-center color='background' no-lines>
-    <button ion-button (click)="openMap()">
+    </button>s
+  </ion-item> -->
+  <ion-item  text-center color='background' no-lines>
+    <button class="padding" class = "button-container" ion-button (click)="openMap()">
       Charging Points
     </button>
   </ion-item>
 
   <ion-item  text-center color='background' no-lines>
-    <button ion-button (click)="viewTask()">
+    <button class="padding" class = "button-container" ion-button (click)="viewTask()">
       View Task List
     </button>
   </ion-item>
 
   <ion-item  text-center color='background' no-lines>
-    <button ion-button (click)="openTask()">
+    <button class = "button-container" ion-button (click)="openTask()">
       Create New Task
     </button>
   </ion-item>

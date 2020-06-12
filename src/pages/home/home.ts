@@ -7,6 +7,7 @@ import {fromPromise} from "rxjs/observable/fromPromise";
 import { Store, ActionReducer } from '@ngrx/store';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
+import { subscribeOn } from 'rxjs/operator/subscribeOn';
 
 
 @IonicPage()
@@ -22,6 +23,7 @@ export class HomePage {
   updatedata:any;
   ChargeLevel:any;
   start: string;
+  vehicle: string;
   destination: string;
   // displayinfo: any;
   constructor(
@@ -51,7 +53,8 @@ export class HomePage {
 
 
   ionViewDidLoad(){
-    this.RetrieveID();
+     this.RetrieveVehicle();
+    // this.RetrieveID();
   }
 
   logOut() {
@@ -101,6 +104,7 @@ export class HomePage {
     // var info = this.username;
     this.navCtrl.push('CreateTaskPage');
   }
+
   async viewTask(){
     let Tasks = Parse.Object.extend('Task')
     let tasks = new Parse.Query(Tasks);
@@ -129,6 +133,7 @@ export class HomePage {
       };
       taskinfo.push(info);
     }
+
     if(taskinfo.length==0){
       alert('You have no task history!');
     }else{
@@ -176,12 +181,7 @@ export class HomePage {
   }
 
   ClosestCharging(){
-    console.log("enter check current ")
-  //   this.geolocation.getCurrentPosition().then((position:Position) => {
-  //     console.log("position here ")
-  //     // this.GetMyCurrentPosition();
-  //     // // console.log('Current Position', resp.coords);
-  //     this.geoposition = position;
+
       var geoposition = new Parse.GeoPoint(51.488713,0.005998)
       let geoPoint = new Parse.GeoPoint(geoposition.latitude, geoposition.longitude);
       let query = new Parse.Query("Site");
@@ -217,11 +217,23 @@ export class HomePage {
       }, err => {
         console.log('Error getting closest user', err)
       })
-
-
   }
 
-  PushNotification(){
+  PushNotificationAllocate(){
+    this.localnotification.schedule({
+      id: 2,
+      title: 'Vehicle Allocation',
+      text: 'You are allocated to Vehicle '+this.vehicle,
+      foreground: true,
+      // icon: 'res://ic_stat_battery_alert',
+      smallIcon: 'res://ic_stat_flash_on',
+    });
+    this.localnotification.on('click').subscribe(notification => {
+      this.navCtrl.push('HomePage');
+    });
+  }
+
+  PushNotificationLow(){
     this.localnotification.schedule({
       id: 1,
       title: 'Low Battery EV!',
@@ -241,20 +253,63 @@ export class HomePage {
     Taskquery.equalTo('Username',this.username);
     const result = await Taskquery.find();
     var id = result[0].get('VehicleID');
-    console.log("id is: ", id);
+    // console.log("id is: ", id);
 
     var fleet = Parse.Object.extend('Fleet');
     var fleetquery = new Parse.Query(fleet);
-    var subscription = fleetquery.subscribe();
+    // var subscription = fleetquery.subscribe();
+    let subscription = await fleetquery.subscribe();
 
     fleetquery.equalTo('VehicleID', id);
+    // console.log("push now: ",fleetquery);
     subscription.on('update', (object) => {
       var level = object.get('ChargingLevel');
       if(level<="30"){
-      this.PushNotification();
+        this.PushNotificationLow();
       }
     });
   }
 
+  async RetrieveVehicle(){
+
+    var today = new Date();
+    var date:string = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+    var Task = Parse.Object.extend('Task');
+    var Taskquery = new Parse.Query(Task);
+    let subscription = Taskquery.subscribe();
+
+    Taskquery.equalTo('Username',this.username);
+    Taskquery.equalTo('Date',date);
+
+    // console.log("result id: ",result[0].get("VehicleID"));
+    // console.log("date is ",date);
+
+    subscription.on('update', (object) => {
+      console.log('UPDATED');
+      this.vehicle = object.get('VehicleID');
+      // console.log("id: is ",this.vehicle);
+      this.PushNotificationAllocate();
+      subscription.unsubscribe();
+      this.RetrieveID();
+    });
+  //  var fleet = Parse.Object.extend('User');
+  //   var fleetquery = new Parse.Query(fleet);
+  //   // var subscription = fleetquery.subscribe();
+  //   let subscription = await fleetquery.subscribe();
+
+  //   // fleetquery.equalTo('VehicleID', "AA1");
+  //   // console.log("push now: ",fleetquery);
+  //   subscription.on('update', (object) => {
+  //     console.log("vehicle sub");
+  //     var level = object.get('ChargingLevel');
+  //     if(level>="30"){
+  //     this.PushNotificationLow();
+  //     subscription.unsubscribe();
+  //     this.RetrieveID();
+  //     }
+  //   });
+
+  }
 
 }
