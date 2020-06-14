@@ -51,7 +51,7 @@ export class CreateTaskPage {
       // this.displayinfo=this.username;
      this.store.select('appReducer').subscribe(state => {
         this.username = state.username;
-        console.log('username',this.username);
+        // console.log('username',this.username);
       });
   }
   selectedTask(event) {
@@ -86,12 +86,13 @@ export class CreateTaskPage {
     //   alert('Please not change your username!');
     // }
     if((this.username==null)||(this.destination ==null)||
-      (this.distance ==null)||(this.number==null)||(this.time ==null)||(this.vehicletype==null)||
-      (this.tasktype ==null)||(this.servicetype==null)||(this.date==null)||(this.complete==null)){
+      (this.distance ==null)||(this.time ==null)||(this.servicetype==null)||
+      (this.date==null)||(this.complete==null)){
 
-      alert('Please fill in all details inorder to creat a task!');
-      //this.navCtrl.setRoot('RegisterPage');
+      alert('Please fill in all details in order to creat a task!');
+
     }else{
+      console.log("vehicle type: ",typeof this.vehicletype);
       const Task = Parse.Object.extend("Task");
       const task = new Task();
       //16 variables for Task objcet
@@ -114,11 +115,8 @@ export class CreateTaskPage {
       task.save()
       .then((player) => {
         // Success
-        alert('New task is created successfully!');
-        // this.toastCtrl.create({
-        //      message: 'Account created successfully',
-        //      duration: 2000
-        //    })
+        // alert('New task is created successfully!');
+
         this.username = '';
         //this.stop = [{}];
         this.stop = '';
@@ -133,17 +131,16 @@ export class CreateTaskPage {
         this.tasktype = '';
         this.servicetype = '';
         this.instruction = '';
+        alert('New task is created successfully!');
+        this.navCtrl.setRoot('HomePage');
       }, (error) => {
         // Save fails
         alert('Failed to create new object, with error code: ' + error.message);
       });
-      this.navCtrl.setRoot('HomePage');
+
     }
   }
-  // goback(){
-  //   var info = this.username;
-  //   this.navCtrl.push('HomePage', {info} );
-  // }
+
   viewtask(){
     this.navCtrl.push('TasklistPage');
   }

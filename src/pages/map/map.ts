@@ -5,15 +5,6 @@ import { GoogleMaps,GoogleMap, GoogleMapOptions } from '@ionic-native/google-map
 import { FindValueSubscriber } from 'rxjs/operators/find';
 import { InfoWindowManager } from '@agm/core';
 import { Store } from '@ngrx/store';
-// import { LaunchNavigator, LaunchNavigatorOptions} from '@ionic-native/launch-navigator';
-// import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
-/**
- * Generated class for the MapsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 declare var google:any;
 

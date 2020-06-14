@@ -21,11 +21,11 @@ export class MyApp {
       splashScreen.hide();
       // this.pushSetUp();
 
-      //ranking now
-      Parse.initialize("xJ7F9Uixopap8zn7WGlXoWdQMtNaH3DmamCMnMI1", "TsOqkbfPfY7gUDoDluOJ59e5r3lBYLKLeBUSsmya");
+      //using testingtask app
+      Parse.initialize("8LMcCxaA5uezEUsY0mefPXDaX1g3GFai0fZQbOlh", "wXeWeEjSPbiL06TA0G0WasnB9rVH4wxmiRjXiNbj");
       // Parse.initialize("XiiCvvh3t61q2vMSQornvYKPPsPcTszpsMB0tpbT", "UMEsWQpchNtjV5XCyaA6uXaZOAiXO5x73vObhzKv");
       Parse.serverURL = 'https://parseapi.back4app.com/';
-      Parse.liveQueryServerURL = 'ws://testingtask.back4app.io';
+      Parse.liveQueryServerURL = 'ws://haha.back4app.io';
 
       Parse.User.currentAsync().then(user => {
         console.log('Logged user', user);

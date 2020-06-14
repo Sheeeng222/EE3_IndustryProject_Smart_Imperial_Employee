@@ -25,6 +25,7 @@ export class HomePage {
   start: string;
   vehicle: string;
   destination: string;
+  date:string;
   // displayinfo: any;
   constructor(
     public platform: Platform,
@@ -37,24 +38,22 @@ export class HomePage {
     public localnotification: LocalNotifications,
     public launchnavigator: LaunchNavigator
   ) {
-    // let data  = this.navParams.get("info");
-    // this.username= data;
-    // console.log('HomeReceive ' + data);
-    // this.displayinfo=data;
     let data  = Parse.User.current();
     this.username = data.get("username");
-    console.log("username: ", this.username);
+    // console.log("username: ", this.username);
     this.store.dispatch({
       type: "LOGIN",
       payload: this.username
     });
 
+    var today = new Date();
+    this.date = today.getFullYear()+'-'+(("0" + (today.getMonth() + 1)).slice(-2))+'-'+("0" + today.getDate()).slice(-2);
   }
 
 
   ionViewDidLoad(){
-     this.RetrieveVehicle();
-    // this.RetrieveID();
+    this.RetrieveVehicle();
+    this.RetrieveID(this.date);
   }
 
   logOut() {
@@ -153,11 +152,7 @@ export class HomePage {
     let employees = new Parse.Query(Employees);
     employees.equalTo("Username", this.username);
     const results = await employees.find();
-    // for (let i = 0; i < results.length; i++) {
-    //   var object = results[i];
-    //   // console.log("hahah",results.length);
-    // }
-    // console.log("hahah",typeof results);
+
     var info = {Title:results[0].get('Title'),
                 FirstName:results[0].get('FirstName'),
                 LastName: results[0].get('LastName'),
@@ -225,7 +220,7 @@ export class HomePage {
       title: 'Vehicle Allocation',
       text: 'You are allocated to Vehicle '+this.vehicle,
       foreground: true,
-      // icon: 'res://ic_stat_battery_alert',
+      icon: 'res://car',
       smallIcon: 'res://ic_stat_flash_on',
     });
     this.localnotification.on('click').subscribe(notification => {
@@ -239,7 +234,7 @@ export class HomePage {
       title: 'Low Battery EV!',
       text: 'You need to charge you vehicle ASAP!',
       foreground: true,
-      icon: 'res://ic_stat_battery_alert',
+      icon: 'res://ic_warning',
       smallIcon: 'res://ic_stat_flash_on',
     });
     this.localnotification.on('click').subscribe(notification => {
@@ -247,17 +242,19 @@ export class HomePage {
     });
   }
 
-  async RetrieveID(){
+  async RetrieveID(date){
     var Task = Parse.Object.extend('Task');
     var Taskquery = new Parse.Query(Task);
     Taskquery.equalTo('Username',this.username);
+    Taskquery.equalTo('Date',date);
     const result = await Taskquery.find();
-    var id = result[0].get('VehicleID');
-    // console.log("id is: ", id);
+    if(result.length!=0){
+      var id = result[0].get('VehicleID');
+      console.log("id is: ", id);
+    }
 
-    var fleet = Parse.Object.extend('Fleet');
+    var fleet = Parse.Object.extend('FleetT');
     var fleetquery = new Parse.Query(fleet);
-    // var subscription = fleetquery.subscribe();
     let subscription = await fleetquery.subscribe();
 
     fleetquery.equalTo('VehicleID', id);
@@ -272,44 +269,37 @@ export class HomePage {
 
   async RetrieveVehicle(){
 
-    var today = new Date();
-    var date:string = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    // var today = new Date();
+    // var date:string = today.getFullYear()+'-'+(("0" + (today.getMonth() + 1)).slice(-2))+'-'+("0" + today.getDate()).slice(-2);
 
     var Task = Parse.Object.extend('Task');
     var Taskquery = new Parse.Query(Task);
     let subscription = Taskquery.subscribe();
 
     Taskquery.equalTo('Username',this.username);
-    Taskquery.equalTo('Date',date);
-
-    // console.log("result id: ",result[0].get("VehicleID"));
-    // console.log("date is ",date);
+    Taskquery.equalTo('Date',this.date);
+    console.log("this.username ",this.username);
+    console.log("date: ",this.date);
+    const result = await Taskquery.find();
+    console.log("result ",result.length);
+    if(result.length!=0){
+      for(var i=0;i<result.length;i++){
+      console.log("object id ",result[i].id)
+      }
+    }
 
     subscription.on('update', (object) => {
       console.log('UPDATED');
+      // Taskquery.equalTo('Username',this.username);
+      // Taskquery.equalTo('Date',date);
       this.vehicle = object.get('VehicleID');
       // console.log("id: is ",this.vehicle);
       this.PushNotificationAllocate();
-      subscription.unsubscribe();
-      this.RetrieveID();
+      // subscription.unsubscribe();
+      // this.RetrieveID(date);
     });
-  //  var fleet = Parse.Object.extend('User');
-  //   var fleetquery = new Parse.Query(fleet);
-  //   // var subscription = fleetquery.subscribe();
-  //   let subscription = await fleetquery.subscribe();
-
-  //   // fleetquery.equalTo('VehicleID', "AA1");
-  //   // console.log("push now: ",fleetquery);
-  //   subscription.on('update', (object) => {
-  //     console.log("vehicle sub");
-  //     var level = object.get('ChargingLevel');
-  //     if(level>="30"){
-  //     this.PushNotificationLow();
-  //     subscription.unsubscribe();
-  //     this.RetrieveID();
-  //     }
-  //   });
 
   }
+
 
 }
