@@ -51,6 +51,7 @@ export class RegisterPage {
       const user = new User();
       user.set("username", this.username);
       user.set("password", this.password);
+      user.set("Department","Employee");
       user.save();
       const Employees = Parse.Object.extend("Employees");
       const employees = new Employees();

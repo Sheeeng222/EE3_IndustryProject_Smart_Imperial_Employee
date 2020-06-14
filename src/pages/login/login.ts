@@ -26,20 +26,37 @@ export class LoginPage {
   }
 
   signIn() {
-    Parse.User.logIn(this.username, this.password,{}).then((resp) => {
-      console.log('Logged in successfully', resp);
-      // If you app has Tabs, set root to TabsPage
-      // var info = this.username;
-      this.navCtrl.setRoot('HomePage')
-      console.log('LoginSend ')
-    }, err => {
-      console.log('Error logging in', err);
+      Parse.User.logIn(this.username, this.password,{}).then((resp) => {
+        if( resp.get("Department")=="Employee"){
+          this.navCtrl.setRoot('HomePage');
+        }
+        else{
+          Parse.User.logOut().then((resp) => {
+            alert("You are not an employee!");
 
-      this.toastCtrl.create({
-        message: err.message,
-        duration: 2000
-      }).present();
-    });
+            // this.navCtrl.setRoot('LoginPage');
+          }, err => {
+            console.log('Error logging out', err);
+
+            this.toastCtrl.create({
+              message: 'Error logging out',
+              duration: 2000
+            }).present();
+          })
+        }
+        console.log('Logged in successfully', resp.get("Department"));
+        // If you app has Tabs, set root to TabsPage
+        // var info = this.username;
+
+      }, err => {
+        console.log('Error logging in', err);
+
+        this.toastCtrl.create({
+          message: err.message,
+          duration: 2000
+        }).present();
+      });
+
     const LoginHistory = Parse.Object.extend("LoginHistory");
     const history = new LoginHistory();
     history.set("Username", this.username);
