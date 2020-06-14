@@ -224,7 +224,7 @@ export class HomePage {
       smallIcon: 'res://ic_stat_flash_on',
     });
     this.localnotification.on('click').subscribe(notification => {
-      this.navCtrl.push('HomePage');
+      // this.navCtrl.push('HomePage');
     });
   }
 
@@ -260,6 +260,7 @@ export class HomePage {
     fleetquery.equalTo('VehicleID', id);
     // console.log("push now: ",fleetquery);
     subscription.on('update', (object) => {
+      // console.log("updatejksjk")
       var level = object.get('ChargingLevel');
       if(level<="30"){
         this.PushNotificationLow();
@@ -278,24 +279,22 @@ export class HomePage {
 
     Taskquery.equalTo('Username',this.username);
     Taskquery.equalTo('Date',this.date);
-    console.log("this.username ",this.username);
-    console.log("date: ",this.date);
-    const result = await Taskquery.find();
-    console.log("result ",result.length);
-    if(result.length!=0){
-      for(var i=0;i<result.length;i++){
-      console.log("object id ",result[i].id)
-      }
-    }
+    // console.log("this.username ",this.username);
+    // console.log("date: ",this.date);
+    // const result = await Taskquery.find();
+    // console.log("result ",result.length);
+    // if(result.length!=0){
+    //   for(var i=0;i<result.length;i++){
+    //   console.log("object id ",result[i].id)
+    //   }
+    // }
 
     subscription.on('update', (object) => {
-      console.log('UPDATED');
-      // Taskquery.equalTo('Username',this.username);
-      // Taskquery.equalTo('Date',date);
+      // console.log('UPDATED');
       this.vehicle = object.get('VehicleID');
       // console.log("id: is ",this.vehicle);
       this.PushNotificationAllocate();
-      // subscription.unsubscribe();
+      subscription.unsubscribe();
       // this.RetrieveID(date);
     });
 
