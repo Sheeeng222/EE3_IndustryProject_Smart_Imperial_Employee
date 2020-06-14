@@ -20,7 +20,6 @@ import Parse from 'parse';
   templateUrl: 'taskdetail.html',
 })
 export class TaskdetailPage {
-  displayinfo: any;
   object: any;
   username: any;
   taskref: any;
@@ -42,24 +41,8 @@ export class TaskdetailPage {
   route:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private LaunchNavigator: LaunchNavigator, private store: Store<any>) {
-    // let detailref  = this.navParams.get("data");
-    // this.displayinfo = detailref.username;
-    // this.taskref=detailref.object;
-    // console.log('displayinfo: '+this.displayinfo+" detail: "+ detailref.object);
 
-    // this.stop =detailref.stop;
-    // this.destination=detailref.destination;
-    // this.distance=detailref.distance;
-    // this.time=detailref.time;
-    // this.service=detailref.service;
-    // this.date=detailref.date;
-    // this.complete=detailref.complete;
-    // this.vehicletype=detailref.vehicletype;
-    // this.vehicleid=detailref.vehicleid;
-    // this.task=detailref.task;
-    // this.number=detailref.number;
-    // this.instruction=detailref.instruction;
-    // this.instruction= "West Brompton, UK";
+
     this.store.select('appReducer').subscribe(state => {
       this.object = state.task_detail.object
       this.stop=state.task_detail.stop
@@ -75,6 +58,7 @@ export class TaskdetailPage {
       this.number=state.task_detail.number
       this.instruction=state.task_detail.instruction
       this.depot = state.task_detail.depot
+      this.username = state.username
       // console.log('object',this.object);
     });
 
@@ -130,40 +114,9 @@ export class TaskdetailPage {
     console.log('check complete:'+player.get('Complete'))
     });
   }
-  // goTasklist(){
-  //   // let Tasks = Parse.Object.extend('Task')
-  //   // let tasks = new Parse.Query(Tasks);
-  //   // var taskinfo = [];
-  //   // tasks.equalTo("Username", this.username);
-  //   // const results = await tasks.find();
-  //   // for (let i = 0; i < results.length; i++) {
-  //   //   var object = results[i];
-  //   //   console.log(object.id);
-  //   //   var info ={
-  //   //     username: object.get('Username'),
-  //   //     stop    : object.get('StopPoint'),
-  //   //     destination:  object.get('Destination'),
-  //   //     distance: object.get('Distance'),
-  //   //     time    : object.get('EstimatedTime'),
-  //   //     service : object.get('ServiceType'),
-  //   //     number  : object.get('ReferenceNumber'),
-  //   //     date    : object.get('Date'),
-  //   //     complete: object.get('Complete'),
-  //   //     vehicletype : object.get('VehicleType'),
-  //   //     vehicleid :object.get('VehicleID'),
-  //   //     task    : object.get('TaskType'),
-  //   //     instruction: object.get('Instruction'),
-  //   //     object  :    object.id
-  //   //   };
-  //   //   taskinfo.push(info);
-  //   // }
-  //   this.navCtrl.push('TasklistPage');
-  // }
 
   navigate(){
-    // let options: LaunchNavigatorOptions = {
-    //   start: "51.496969,0.107444"
-    // };
+
     var x = this.stop[0];
     for(var i=1;i<this.stop.length;i++){
       x = x + "+to:"+this.stop[i];

@@ -1,12 +1,6 @@
-<!--
-  Generated template for the TaskPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color = "primary">
     <ion-title>Please create a new task!</ion-title>
   </ion-navbar>
 
@@ -14,30 +8,34 @@
 
 
 <ion-content>
-  <h5>Hello {{username}}</h5>
+  <h5 class="title">Hello {{username}}</h5>
   <ion-list>
-    <h6 class="title">Username:</h6>
+    <h6 class="title">Username:<i ion-text color="danger">*</i> </h6>
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Your Username" [(ngModel)]="username"></ion-input>
     </ion-item>
+
 
 
     <h6 class="title">Stop(s):</h6>
     <ion-item color='background' *ngFor="let stop of stopsArray; let i = index">
       <ion-input class = 'placeholder' placeholder="Stop" [(ngModel)]="stopsArray[i].value"></ion-input>
     </ion-item>
-    <button ion-button   (click)="Add()">Add Stop(s)</button>
-    <button ion-button   (click)="Remove()">Remove Stop(s)</button>
 
-    <h6 class="title">Destination:</h6>
+    <ion-item class="title">
+    <button  ion-button  (click)="Add()">Add Stop(s)</button>
+    <button  ion-button  (click)="Remove()">Remove Stop(s)</button>
+    </ion-item>
+
+    <h6 class="title">Destination:<i ion-text color="danger">*</i></h6>
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Destination" [(ngModel)]="destination"></ion-input>
     </ion-item>
-    <h6 class="title">Distance (miles):</h6>
+    <h6 class="title">Distance (miles):<i ion-text color="danger">*</i></h6>
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Distance"  [(ngModel)]="distance"></ion-input>
     </ion-item>
-    <h6 class="title">Estimated Time:</h6>
+    <h6 class="title">Estimated Time:<i ion-text color="danger">*</i></h6>
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Estimated Time"  [(ngModel)]="time"></ion-input>
     </ion-item>
@@ -45,12 +43,12 @@
     <ion-item color='background'>
       <ion-input class = 'placeholder' placeholder="Reference Number"  [(ngModel)]="number"></ion-input>
     </ion-item>
-    <h6 class="title">Date:</h6>
+    <h6 class="title">Date:<i ion-text color="danger">*</i></h6>
     <ion-item color='background'>
       <ion-label  position="floating">Date: MM/DD/YYYY</ion-label>
       <ion-datetime class = 'placeholder' format="MM/DD/YYYY" min="1998-02-01" max="2050-12-31" [(ngModel)]="date" value="2002-09-23T15:03:46.789"></ion-datetime>
     </ion-item>
-    <h6 class="title">Task Completed:</h6>
+    <h6 class="title">Task Completed:<i ion-text color="danger">*</i></h6>
     <ion-item color='background'>
       <ion-label>Task completed or not:</ion-label>
       <ion-select class = 'placeholder' placeholder="Select One"
@@ -70,7 +68,7 @@
         <ion-option value="Renault">Renault Kangoo</ion-option>
       </ion-select>
     </ion-item>
-    <!-- <h6 class="title">Vehicle ID:</h6>
+    <h6 class="title">Vehicle ID:</h6>
     <ion-item color='background'>
       <ion-label>Vehicle ID:</ion-label>
       <ion-select class = 'placeholder' placeholder="Select One"
@@ -88,7 +86,7 @@
         <ion-option value="SS 2">SS 2</ion-option>
         <ion-option value="SS 3">SS 3</ion-option>
       </ion-select>
-    </ion-item> -->
+    </ion-item>
     <h6 class="title">Task Type:</h6>
     <ion-item color='background'>
       <ion-label>Task Type:</ion-label>
@@ -99,9 +97,9 @@
         <ion-option value="Charging">Charging</ion-option>
       </ion-select>
     </ion-item>
-    <h6 class="title">Service Department:</h6>
+    <h6 class="title">Service Department:<i ion-text color="danger">*</i></h6>
     <ion-item color='background'>
-      <ion-label>Service Department: if applicable</ion-label>
+      <ion-label>Service Department: </ion-label>
       <ion-select class = 'placeholder' multiple="False"
       (ionBlur)="selectedService($event)"
       >
@@ -118,10 +116,13 @@
       <ion-input class = 'placeholder' placeholder="Detail Instruction"  [(ngModel)]="instruction"></ion-input>
     </ion-item>
   </ion-list>
+
+  <div text-left class="title">
+    <i style="font: size 10px"><i ion-text color="danger">*</i> is a mandatory field</i>
+  </div>
   <div text-center>
-    <!-- <button ion-button (click)="goback()">Go Home</button> -->
-    <!-- <button ion-button (click)="viewtask()">View Task List</button> -->
     <button ion-button color="secondary" (click)="create()">Create</button>
   </div>
+
 </ion-content>
 

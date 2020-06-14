@@ -85,5 +85,5 @@
         <preference name="GOOGLE_API_KEY_FOR_ANDROID" value="AIzaSyBJwcfgMlynSllZzxCJ_ehUJkXx1zx6VSs" />
     </plugin>
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="(AIzaSyBJwcfgMlynSllZzxCJ_ehUJkXx1zx6VSs)" />
-    <allow-navigation href="http://localhost:8100" sessionid="7a19a0b6" />
+    <!-- <allow-navigation href="http://localhost:8100" sessionid="d4630e5a" /> -->
 </widget>

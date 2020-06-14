@@ -6,50 +6,50 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>taskdetail</ion-title>
+  <ion-navbar color = "primary">
+    <ion-title >Task Detail</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h5>Hello {{displayinfo}}</h5>
-  <h6>Following is detials of Task Ref.: {{taskref}}</h6>
+  <h5 text-center>Hello {{username}}</h5>
+  <h6 text-center><b>Here are your following task details</b></h6>
   <!-- <ion-scroll scrollX="true" style="white-space: nowrap; height: 300px;"> -->
   <ion-list>
     <ion-item>
-      <ion-label>Stop(s): {{stop}}</ion-label>
+      <ion-label><b>Stop(s):</b> {{stop}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Destination: {{destination}}</ion-label>
+      <ion-label><b>Destination:</b> {{destination}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Distance (miles): {{distance}}</ion-label>
+      <ion-label><b>Distance (miles):</b> {{distance}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Time: {{time}}</ion-label>
+      <ion-label><b>Time:</b> {{time}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Task Date: {{date}}</ion-label>
+      <ion-label><b>Task Date:</b> {{date}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Task Type: {{task}}</ion-label>
+      <ion-label><b>Task Type:</b> {{task}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Service Type: {{service}}</ion-label>
+      <ion-label><b>Service Type:</b> {{service}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Reference Number: {{number}}</ion-label>
+      <ion-label><b>Reference Number:</b> {{number}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Vehicle Type: {{vehicletype}}</ion-label>
+      <ion-label><b>Vehicle Type:</b> {{vehicletype}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Vehicle ID: {{vehicleid}}</ion-label>
+      <ion-label><b>Vehicle ID:</b> {{vehicleid}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Instructions: {{instruction}}</ion-label>
+      <ion-label><b>Instructions:</b> {{instruction}}</ion-label>
     </ion-item>
   </ion-list>
   <!-- List of Sliding Items -->
@@ -59,10 +59,8 @@
     <ion-checkbox slot="start" (click)="updateCheck()" [(ngModel)]="Checkvalue"></ion-checkbox>
 
   </ion-item>
+
   <ion-item text-center="" color="background" no-lines>
-    <!-- <button class = "button-fit" ion-button item-left color="secondary" (click)="goTasklist()">
-      Return Task List
-    </button> -->
     <button class = "button-fit" ion-button color="secondary" (click)="navigate()">
       Navigate your route
     </button>
