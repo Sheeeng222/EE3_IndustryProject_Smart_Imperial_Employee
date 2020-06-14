@@ -143,8 +143,6 @@ export class HomePage {
       })
       this.navCtrl.push('TasklistPage');
     }
-    //console.log('homepush newtaskinfo: '+ newtaskinfo, 'infolength: '+newtaskinfo.length);
-    //console.log('homepush taskinso: '+ taskinfo[0].object +"<>"+taskinfo[1].object);
   }
 
   async profile() {
