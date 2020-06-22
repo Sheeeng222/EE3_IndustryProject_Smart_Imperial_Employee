@@ -46,7 +46,8 @@
         </ion-row>
         <ion-row *ngFor="let item of taskdatas; let i = index">
           <ion-col size="6" text-center> {{ item.date }}</ion-col>
-          <ion-col class = "long-text-click"  text-center (click)="godetail(item)"> {{ item.object }}</ion-col>
+          <ion-col *ngIf = "item.complete=='Yes'" class = "long-text-click" text-center (click)="godetail(item)"> {{ item.object }}</ion-col>
+          <ion-col *ngIf = "item.complete=='No'" class = "short-text-click" text-center (click)="godetail(item)"> {{ item.object }}</ion-col>
           <ion-col size="6" text-center> {{ item.vehicleid }}</ion-col>
           <ion-col class = "long-text" text-center> {{ item.service }}</ion-col>
         </ion-row>
