@@ -18,8 +18,15 @@ page-tasklist {
                   white-space: nowrap;
                   overflow: hidden;
                   text-overflow: ellipsis;
-                  color: #32db64;
+                  color: #13B40E;
               }
+                &.short-text-click{
+                  width:200px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  color: #B01D05;
+                }
             }
         }
     }

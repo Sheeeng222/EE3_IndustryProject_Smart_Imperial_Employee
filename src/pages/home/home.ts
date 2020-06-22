@@ -53,7 +53,7 @@ export class HomePage {
 
   ionViewDidLoad(){
     this.RetrieveVehicle();
-    this.RetrieveID(this.date);
+    // this.RetrieveID(this.date);
   }
 
   logOut() {
@@ -268,24 +268,12 @@ export class HomePage {
 
   async RetrieveVehicle(){
 
-    // var today = new Date();
-    // var date:string = today.getFullYear()+'-'+(("0" + (today.getMonth() + 1)).slice(-2))+'-'+("0" + today.getDate()).slice(-2);
-
     var Task = Parse.Object.extend('Task');
     var Taskquery = new Parse.Query(Task);
     let subscription = Taskquery.subscribe();
 
     Taskquery.equalTo('Username',this.username);
     Taskquery.equalTo('Date',this.date);
-    // console.log("this.username ",this.username);
-    // console.log("date: ",this.date);
-    // const result = await Taskquery.find();
-    // console.log("result ",result.length);
-    // if(result.length!=0){
-    //   for(var i=0;i<result.length;i++){
-    //   console.log("object id ",result[i].id)
-    //   }
-    // }
 
     subscription.on('update', (object) => {
       // console.log('UPDATED');
@@ -293,7 +281,7 @@ export class HomePage {
       // console.log("id: is ",this.vehicle);
       this.PushNotificationAllocate();
       subscription.unsubscribe();
-      // this.RetrieveID(date);
+      this.RetrieveID(this.date);
     });
 
   }
