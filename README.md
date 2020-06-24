@@ -6,7 +6,18 @@ This repo contains all the code for the employee side of the app. All the source
 
 ## How to run the program
 
-To run the employee side of the application on a Android Emulator, Android Studio needs to be set up. The Software Development Kit(SDK) platform that the team used is Android 10.0 (Q) and Android Virtual Devide(AVD) is Pixel 2 API 29.
+Before running the application, make sure that the Node.JS is installed and run the following command in the terminal:
+
+```
+npm install -g @ionic/cli
+```
+Then run this command to install all the packages that used in the program:
+
+```
+npm install
+```
+
+To run the application on a Android Emulator, Android Studio needs to be set up. The Software Development Kit(SDK) platform that the team used is Android 10.0 (Q) and Android Virtual Devide(AVD) is Pixel 2 API 29.
 
 Once done, clone this repository on the computer, cd into it and run the following command in the terminal
 
