@@ -222,7 +222,7 @@ export class HomePage {
       smallIcon: 'res://ic_stat_flash_on',
     });
     this.localnotification.on('click').subscribe(notification => {
-      // this.navCtrl.push('HomePage');
+      this.navCtrl.push('HomePage');
     });
   }
 
