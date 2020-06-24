@@ -21,8 +21,8 @@ export class MyApp {
       splashScreen.hide();
       // this.pushSetUp();
 
-      //using testingtask app
-      Parse.initialize("xJ7F9Uixopap8zn7WGlXoWdQMtNaH3DmamCMnMI1", "TsOqkbfPfY7gUDoDluOJ59e5r3lBYLKLeBUSsmya");
+      //using video Demo app
+      Parse.initialize("c8qadlEiWt85QBOWykhltmTf6B2PPEee3C3mCL3c", "JGmav892vg8obfrEioSdlkbXHUsCE0apAD5dWpur");
       // Parse.initialize("XiiCvvh3t61q2vMSQornvYKPPsPcTszpsMB0tpbT", "UMEsWQpchNtjV5XCyaA6uXaZOAiXO5x73vObhzKv");
       Parse.serverURL = 'https://parseapi.back4app.com/';
       Parse.liveQueryServerURL = 'ws://testingtask.back4app.io';
