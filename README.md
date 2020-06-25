@@ -24,3 +24,10 @@ Once done, clone this repository on the computer, cd into it and run the followi
 ```emulator
 ionic cordova emulate Android --l
 ```
+
+## Video Demonstration
+
+A video has been recorded by the team for demonstrating the functionality of this application.
+A link has provided below:
+
+https://drive.google.com/file/d/1f3JzzoFdDI2wPAGWOICLBs6AK2NJ3vmE/preview
